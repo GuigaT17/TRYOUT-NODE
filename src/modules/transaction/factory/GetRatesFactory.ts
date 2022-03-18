@@ -11,7 +11,7 @@ export default class GetRatesFactory {
     }
 
     public async getRates(){
-        const response = await axios.get('https://api.exchangerate.host/2021-01-01');
+        const response = await axios.get(urlconfig.url);
         const rates = response.data.rates;
         return response.data.rates;
     }

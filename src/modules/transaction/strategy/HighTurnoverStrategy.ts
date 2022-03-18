@@ -8,13 +8,14 @@ export default class HighTurnoverStrategy implements ICommissionCalculator {
         const getRates = new GetRatesFactory();
         const rates = await getRates.getRates();
         const transactions = await getMonthlyTransactions.execute({ date, client_id });
+        console.log(transactions);
         let monthlyProfits: number = 0;
         await transactions.map(async t => {
             if(t.currency == "EUR"){
                 monthlyProfits = monthlyProfits + parseInt(t.amount.toString());
             } else {
                 var rate = rates[t.currency];
-                monthlyProfits = monthlyProfits + (t.amount.valueOf() * rate);
+                monthlyProfits = monthlyProfits + (t.amount.valueOf() / rate);
             }
         });
         if(monthlyProfits >= 1000){

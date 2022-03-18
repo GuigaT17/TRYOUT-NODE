@@ -21,7 +21,7 @@ export default class TransactionController {
 
         const transaction = await createTransaction.execute({ date, amount, currency, client_id });
 
-        const transactionAmount = amount * rate;
+        const transactionAmount = amount / rate;
 
         const commisionCalculator = new CommisionFactory();
         const commisionAmount = await commisionCalculator.commision(transactionAmount, client_id, date);
